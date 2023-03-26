@@ -7,9 +7,7 @@ export type BaseLocale = 'en'
 
 export type Locales =
 	| 'en'
-	| 'fr'
-	| 'ru'
-	| 'uk'
+	| 'id'
 
 export type Translation = RootTranslation
 
@@ -30,7 +28,7 @@ type RootTranslation = {
 		 */
 		GUILD_ONLY: string
 		/**
-		 * T​h​i​s​ ​c​o​m​m​a​n​d​ ​c​a​n​ ​o​n​l​y​ ​b​e​ ​u​s​e​d​ ​i​n​ ​a​ ​N​S​F​W​ ​c​h​a​n​n​e​l​.
+		 * W​h​y​ ​a​r​e​ ​y​o​u​ ​t​r​y​i​n​g​ ​t​o​ ​u​s​e​ ​t​h​i​s​ ​c​o​m​m​a​n​d​ ​i​n​ ​a​ ​n​o​n​-​N​S​F​W​ ​c​h​a​n​n​e​l​?
 		 */
 		NSFW: string
 	}
@@ -189,7 +187,7 @@ export type TranslationFunctions = {
 		 */
 		GUILD_ONLY: () => LocalizedString
 		/**
-		 * This command can only be used in a NSFW channel.
+		 * Why are you trying to use this command in a non-NSFW channel?
 		 */
 		NSFW: () => LocalizedString
 	}

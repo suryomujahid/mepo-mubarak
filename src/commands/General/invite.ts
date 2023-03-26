@@ -11,12 +11,12 @@ import { getColor } from "@utils/functions"
 @Category('General')
 export default class InviteCommand {
 
-	@Slash({ 
+	@Slash({
 		name: 'invite'
     })
 	@Guard()
 	async invite(
-		interaction: CommandInteraction, 
+		interaction: CommandInteraction,
 		client: Client,
 		{ localize }: InteractionData
 	) {
@@ -25,7 +25,7 @@ export default class InviteCommand {
 			.setTitle(localize.COMMANDS.INVITE.EMBED.TITLE())
 			.setDescription(localize.COMMANDS.INVITE.EMBED.DESCRIPTION({link: generalConfig.links.invite}))
 			.setColor(getColor('primary'))
-			.setFooter({ text : 'Powered by DiscBot Team ❤'})
+			.setFooter({ text : 'Made with ❤ by Waggish Mepo'})
 
 		interaction.followUp({
 			embeds: [embed]

@@ -1,7 +1,7 @@
 {
-  "name": "tscord",
+  "name": "mepo-mubarak",
   "version": "1.0.0",
-  "description": "A fully-featured discord bot template written in Typescript, intended to provide a framework that's easy to use, extend and modify",
+  "description": "Mepo Mubarak is a Muslim-themed Discord bot that provides users with a range of useful features and resources to enhance their experience and knowledge of Islam",
   "license": "MIT",
   "main": "build/main.js",
   "scripts": {
