@@ -65,6 +65,43 @@ const en: BaseTranslation = {
 			DESCRIPTION: 'Pong!',
 			MESSAGE: '{member:string} Pong! The message round-trip took {time:number}ms.{heartbeat:string}',
 		},
+		RANDOM_HADITH: {
+			DESCRIPTION: 'Get a random hadith.',
+			EMBED: {
+				TITLE: 'Random Hadith',
+				DESCRIPTION: '{hadith:string}',
+				FOOTER: '{rawi:string} - {no:number}',
+			},
+			SELECT_MENU: {
+				TITLE: 'Select a rawi',
+				DESCRIPTION: 'Select a rawi to get a random hadith from. (optional)',
+			},
+			ERRORS: {
+				NO_HADITH: 'No hadith found.',
+			},
+		},
+		ALL_RAWI: {
+			DESCRIPTION: 'List of rawi.',
+			EMBED: {
+				TITLE: 'List of Rawi',
+				DESCRIPTION: '{rawis}',
+			},
+			ERRORS: {
+				NO_RAWI: 'No rawi found.',
+			},
+		},
+		DAILY_HADITH: {
+			TITLE: 'Hadith of the day',
+			DESCRIPTION: 'Enable daily hadith notification at 12 PM in this channel.',
+			EMBED: {
+				ENABLED: 'Daily hadith notification enabled on this channel.',
+				DISABLED: 'Daily hadith notification disabled on this channel.',
+			},
+			ERRORS: {
+				NO_CHANNEL: 'You must be in a channel to use this command.',
+				ALREADY_ENABLED: 'You can only enable daily hadith notification on 1 channel.',
+			},
+		},
 	},
 }
 

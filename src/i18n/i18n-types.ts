@@ -169,6 +169,98 @@ type RootTranslation = {
 			 */
 			MESSAGE: RequiredParams<'heartbeat' | 'member' | 'time'>
 		}
+		RANDOM_HADITH: {
+			/**
+			 * G​e​t​ ​a​ ​r​a​n​d​o​m​ ​h​a​d​i​t​h​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * R​a​n​d​o​m​ ​H​a​d​i​t​h
+				 */
+				TITLE: string
+				/**
+				 * {​h​a​d​i​t​h​}
+				 * @param {string} hadith
+				 */
+				DESCRIPTION: RequiredParams<'hadith'>
+				/**
+				 * {​r​a​w​i​}​ ​-​ ​{​n​o​}
+				 * @param {number} no
+				 * @param {string} rawi
+				 */
+				FOOTER: RequiredParams<'no' | 'rawi'>
+			}
+			SELECT_MENU: {
+				/**
+				 * S​e​l​e​c​t​ ​a​ ​r​a​w​i
+				 */
+				TITLE: string
+				/**
+				 * S​e​l​e​c​t​ ​a​ ​r​a​w​i​ ​t​o​ ​g​e​t​ ​a​ ​r​a​n​d​o​m​ ​h​a​d​i​t​h​ ​f​r​o​m​.​ ​(​o​p​t​i​o​n​a​l​)
+				 */
+				DESCRIPTION: string
+			}
+			ERRORS: {
+				/**
+				 * N​o​ ​h​a​d​i​t​h​ ​f​o​u​n​d​.
+				 */
+				NO_HADITH: string
+			}
+		}
+		ALL_RAWI: {
+			/**
+			 * L​i​s​t​ ​o​f​ ​r​a​w​i​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * L​i​s​t​ ​o​f​ ​R​a​w​i
+				 */
+				TITLE: string
+				/**
+				 * {​r​a​w​i​s​}
+				 * @param {unknown} rawis
+				 */
+				DESCRIPTION: RequiredParams<'rawis'>
+			}
+			ERRORS: {
+				/**
+				 * N​o​ ​r​a​w​i​ ​f​o​u​n​d​.
+				 */
+				NO_RAWI: string
+			}
+		}
+		DAILY_HADITH: {
+			/**
+			 * H​a​d​i​t​h​ ​o​f​ ​t​h​e​ ​d​a​y
+			 */
+			TITLE: string
+			/**
+			 * E​n​a​b​l​e​ ​d​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​a​t​ ​1​2​ ​P​M​ ​i​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * D​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​e​n​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+				 */
+				ENABLED: string
+				/**
+				 * D​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​d​i​s​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+				 */
+				DISABLED: string
+			}
+			ERRORS: {
+				/**
+				 * Y​o​u​ ​m​u​s​t​ ​b​e​ ​i​n​ ​a​ ​c​h​a​n​n​e​l​ ​t​o​ ​u​s​e​ ​t​h​i​s​ ​c​o​m​m​a​n​d​.
+				 */
+				NO_CHANNEL: string
+				/**
+				 * Y​o​u​ ​c​a​n​ ​o​n​l​y​ ​e​n​a​b​l​e​ ​d​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​o​n​ ​1​ ​c​h​a​n​n​e​l​.
+				 */
+				ALREADY_ENABLED: string
+			}
+		}
 	}
 }
 
@@ -319,6 +411,94 @@ export type TranslationFunctions = {
 			 * {member} Pong! The message round-trip took {time}ms.{heartbeat}
 			 */
 			MESSAGE: (arg: { heartbeat: string, member: string, time: number }) => LocalizedString
+		}
+		RANDOM_HADITH: {
+			/**
+			 * Get a random hadith.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * Random Hadith
+				 */
+				TITLE: () => LocalizedString
+				/**
+				 * {hadith}
+				 */
+				DESCRIPTION: (arg: { hadith: string }) => LocalizedString
+				/**
+				 * {rawi} - {no}
+				 */
+				FOOTER: (arg: { no: number, rawi: string }) => LocalizedString
+			}
+			SELECT_MENU: {
+				/**
+				 * Select a rawi
+				 */
+				TITLE: () => LocalizedString
+				/**
+				 * Select a rawi to get a random hadith from. (optional)
+				 */
+				DESCRIPTION: () => LocalizedString
+			}
+			ERRORS: {
+				/**
+				 * No hadith found.
+				 */
+				NO_HADITH: () => LocalizedString
+			}
+		}
+		ALL_RAWI: {
+			/**
+			 * List of rawi.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * List of Rawi
+				 */
+				TITLE: () => LocalizedString
+				/**
+				 * {rawis}
+				 */
+				DESCRIPTION: (arg: { rawis: unknown }) => LocalizedString
+			}
+			ERRORS: {
+				/**
+				 * No rawi found.
+				 */
+				NO_RAWI: () => LocalizedString
+			}
+		}
+		DAILY_HADITH: {
+			/**
+			 * Hadith of the day
+			 */
+			TITLE: () => LocalizedString
+			/**
+			 * Enable daily hadith notification at 12 PM in this channel.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * Daily hadith notification enabled on this channel.
+				 */
+				ENABLED: () => LocalizedString
+				/**
+				 * Daily hadith notification disabled on this channel.
+				 */
+				DISABLED: () => LocalizedString
+			}
+			ERRORS: {
+				/**
+				 * You must be in a channel to use this command.
+				 */
+				NO_CHANNEL: () => LocalizedString
+				/**
+				 * You can only enable daily hadith notification on 1 channel.
+				 */
+				ALREADY_ENABLED: () => LocalizedString
+			}
 		}
 	}
 }

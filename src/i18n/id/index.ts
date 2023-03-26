@@ -65,6 +65,43 @@ const id: Translation = {
 			DESCRIPTION: 'Pong!',
 			MESSAGE: '{member} Pong! Perjalanan pesan ini memakan waktu {time}ms.{heartbeat}',
 		},
+		RANDOM_HADITH: {
+			DESCRIPTION: 'Dapatkan hadist secara acak.',
+			EMBED: {
+				TITLE: 'Random Hadist',
+				DESCRIPTION: '{hadith}',
+				FOOTER: '{rawi} - {no}',
+			},
+			SELECT_MENU: {
+				TITLE: 'Pilih rawi',
+				DESCRIPTION: 'Pilih rawi untuk mendapatkan hadist secara acak. (opsional)',
+			},
+			ERRORS: {
+				NO_HADITH: 'Tidak ada hadist yang ditemukan.',
+			},
+		},
+		ALL_RAWI: {
+			DESCRIPTION: 'Daftar rawi.',
+			EMBED: {
+				TITLE: 'Daftar Rawi',
+				DESCRIPTION: '{rawis}',
+			},
+			ERRORS: {
+				NO_RAWI: 'Tidak ada rawi yang ditemukan.',
+			},
+		},
+		DAILY_HADITH: {
+			TITLE: 'Hadist Hari Ini',
+			DESCRIPTION: 'Aktifkan notifikasi hadist harian setiap jam 12 siang di channel ini.',
+			EMBED: {
+				ENABLED: 'Notifikasi hadist harian diaktifkan di channel ini.',
+				DISABLED: 'Notifikasi hadist harian dinonaktifkan di channel ini.',
+			},
+			ERRORS: {
+				NO_CHANNEL: 'Kamu harus berada di channel untuk menggunakan perintah ini.',
+				ALREADY_ENABLED: 'Kamu hanya bisa mengaktifkan notifikasi hadist harian di 1 channel.',
+			},
+		},
 	},
 }
 
