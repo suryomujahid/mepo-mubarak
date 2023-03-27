@@ -29,7 +29,7 @@ export default class RandomHadithCommand {
     const hadith: HadithType | undefined = await this.hadith.getRandomHadith(rawi)
 
     if (hadith) {
-      const body = `${hadith.contents.arab}\n\n${hadith.contents.id}`
+      const body = `${hadith?.contents?.arab}\n\n${hadith?.contents?.id}`
 
       const embed = new EmbedBuilder()
         .setAuthor({
@@ -41,10 +41,11 @@ export default class RandomHadithCommand {
         .setColor(getColor('primary'))
         .setTimestamp()
         .setFooter({
-          text: localize['COMMANDS']['RANDOM_HADITH']['EMBED']['FOOTER']({rawi: hadith.name, no: hadith.contents.number})
+          text: localize['COMMANDS']['RANDOM_HADITH']['EMBED']['FOOTER']({rawi: hadith?.name, no: hadith?.contents?.number})
         })
 
       await interaction.followUp({ embeds: [embed] })
-    } else throw new UnknownReplyError(interaction, localize['COMMANDS']['RANDOM_HADITH']['ERRORS']['NO_HADITH']())
+    } else if (!hadith) throw new UnknownReplyError(interaction, localize['COMMANDS']['RANDOM_HADITH']['ERRORS']['NO_HADITH']())
+    else throw new UnknownReplyError(interaction)
   }
 }

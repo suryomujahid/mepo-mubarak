@@ -26,8 +26,8 @@ export default class AllRawiCommand {
     { localize }: InteractionData
   ) {
     const rawis: HadithRawiType[] | undefined = await this.hadith.getAllRawi()
-    if (rawis) {
-      const body = rawis.map(rawi => rawi.id).join('\n')
+    if (rawis && rawis.length > 0) {
+      const body = rawis.map(rawi => rawi?.id).join('\n')
 
       const embed = new EmbedBuilder()
         .setAuthor({

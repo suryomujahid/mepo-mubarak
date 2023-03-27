@@ -55,7 +55,7 @@ export default class DailyHadith {
       const channel = guild.channels.cache.get(guildNotification.channelId)
 
       // TODO: Add language support
-      const body = `${hadith.contents.arab}\n\n${hadith.contents.id}`
+      const body = `${hadith?.contents?.arab}\n\n${hadith?.contents?.id}`
       const embed =  new EmbedBuilder()
         // .setAuthor({
         //   name: interaction.user.username,
@@ -66,7 +66,7 @@ export default class DailyHadith {
         .setColor(getColor('primary'))
         .setTimestamp()
         .setFooter({
-          text: L['en']['COMMANDS']['RANDOM_HADITH']['EMBED']['FOOTER']({rawi: hadith.name, no: hadith.contents.number})
+          text: L['en']['COMMANDS']['RANDOM_HADITH']['EMBED']['FOOTER']({rawi: hadith?.name, no: hadith?.contents?.number})
         })
 
       await (channel as TextChannel).send({ embeds: [embed] })
