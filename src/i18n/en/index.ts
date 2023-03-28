@@ -99,7 +99,8 @@ const en: BaseTranslation = {
 			},
 			ERRORS: {
 				NO_CHANNEL: 'You must be in a channel to use this command.',
-				ALREADY_ENABLED: 'You can only enable daily hadith notification on 1 channel.',
+				ALREADY_ENABLED: 'You already have daily hadith notification enabled on this channel.',
+				MUST_BE_ENABLED: 'Daily hadith notification must be enabled on this channel to disable it.',
 			},
 		},
 	},

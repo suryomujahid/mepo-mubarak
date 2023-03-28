@@ -5,12 +5,10 @@ import { delay, inject, singleton } from "tsyringe"
 import { Database, Logger } from "@services"
 import { Schedule } from "@decorators"
 
-
 @singleton()
 export class Hadith {
 
   private hadithRawiRepo: EntityRepository<HadithRawi>
-  private guildNotificationRepo: EntityRepository<GuildNotification>
 
   constructor(
     private db: Database,
@@ -18,7 +16,6 @@ export class Hadith {
     @inject(delay(() => Client)) private client: Client,
   ) {
     this.hadithRawiRepo = this.db.em.getRepository(HadithRawi)
-    this.guildNotificationRepo = this.db.em.getRepository(GuildNotification)
     this.logger
   }
 

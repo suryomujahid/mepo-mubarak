@@ -99,7 +99,8 @@ const id: Translation = {
 			},
 			ERRORS: {
 				NO_CHANNEL: 'Kamu harus berada di channel untuk menggunakan perintah ini.',
-				ALREADY_ENABLED: 'Kamu hanya bisa mengaktifkan notifikasi hadist harian di 1 channel.',
+				ALREADY_ENABLED: 'Kamu sudah memiliki notifikasi hadist harian di channel ini.',
+				MUST_BE_ENABLED: 'Notifikasi hadist harian harus diaktifkan di channel ini untuk menonaktifkannya.',
 			},
 		},
 	},

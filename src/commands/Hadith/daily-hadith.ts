@@ -34,29 +34,29 @@ export default class DailyHadithCommand {
     client: Client,
     { localize }: InteractionData
   ) {
-
     // TODO: Create a service to handle this (especially the part where database is called)
     const guild = resolveGuild(interaction),
       guildData = await this.db.get(GuildNotification).findOne({ id: guild?.id || '' }),
       channel = resolveChannel(interaction)
 
-    if (guildData && state) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['ALREADY_ENABLED']())
+    if (guildData.dailyHadith && state && (channel?.id === guildData.channelId)) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['ALREADY_ENABLED']())
 
     try {
       if (guildData) {
         guildData.dailyHadith = state
 
-        if (state) this.db.get(GuildNotification).persistAndFlush(guildData)
-        else this.db.get(GuildNotification).removeAndFlush(guildData)
+        this.db.get(GuildNotification).persistAndFlush(guildData)
 
         const message = state ? localize['COMMANDS']['DAILY_HADITH']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_HADITH']['EMBED']['DISABLED']()
         simpleSuccessEmbed(interaction, message)
       }
       else {
+        if (!state) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['MUST_BE_ENABLED']())
+
         const newGuild = new GuildNotification()
-        newGuild.id = guild?.id || ''
-        newGuild.dailyHadith = state || false
-        newGuild.channelId = channel?.id || ''
+        newGuild.id = guild!.id
+        newGuild.dailyHadith = state
+        newGuild.channelId = channel!.id
         this.db.get(GuildNotification).persistAndFlush(newGuild)
 
         const message = state ? localize['COMMANDS']['DAILY_HADITH']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_HADITH']['EMBED']['DISABLED']()

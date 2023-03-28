@@ -256,9 +256,13 @@ type RootTranslation = {
 				 */
 				NO_CHANNEL: string
 				/**
-				 * Y​o​u​ ​c​a​n​ ​o​n​l​y​ ​e​n​a​b​l​e​ ​d​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​o​n​ ​1​ ​c​h​a​n​n​e​l​.
+				 * Y​o​u​ ​a​l​r​e​a​d​y​ ​h​a​v​e​ ​d​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​e​n​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
 				 */
 				ALREADY_ENABLED: string
+				/**
+				 * D​a​i​l​y​ ​h​a​d​i​t​h​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​m​u​s​t​ ​b​e​ ​e​n​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​ ​t​o​ ​d​i​s​a​b​l​e​ ​i​t​.
+				 */
+				MUST_BE_ENABLED: string
 			}
 		}
 	}
@@ -495,9 +499,13 @@ export type TranslationFunctions = {
 				 */
 				NO_CHANNEL: () => LocalizedString
 				/**
-				 * You can only enable daily hadith notification on 1 channel.
+				 * You already have daily hadith notification enabled on this channel.
 				 */
 				ALREADY_ENABLED: () => LocalizedString
+				/**
+				 * Daily hadith notification must be enabled on this channel to disable it.
+				 */
+				MUST_BE_ENABLED: () => LocalizedString
 			}
 		}
 	}

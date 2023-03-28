@@ -1,12 +1,6 @@
-// const rawi = {
-//   id: ["abu-daud", "ahmad", "bukhari", "darimi", "ibnu-majah", "malik", "muslim", "nasai", "tirmidzi"],
-//   available: [3000, 20, 2000, 1000, 2000, 500, 1500, 4000, 3625]
-// }
-
 type HadithResponseType = {
   code: number
   message: string
-  // data is optional because the API sometimes returns an empty array
   data?: HadithRawiType[]
   error: boolean
 }
