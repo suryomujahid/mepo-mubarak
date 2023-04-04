@@ -44,6 +44,14 @@ type RootTranslation = {
 		 */
 		NO_COMMAND_DESCRIPTION: string
 	}
+	QURAN_CONFIG: {
+		SURAH: {
+			/**
+			 * q​u​r​a​n​-​u​t​h​m​a​n​i​,​e​n​.​s​a​h​i​h
+			 */
+			EDITIONS: string
+		}
+	}
 	COMMANDS: {
 		INVITE: {
 			/**
@@ -265,6 +273,170 @@ type RootTranslation = {
 				MUST_BE_ENABLED: string
 			}
 		}
+		QURAN: {
+			/**
+			 * R​e​a​d​ ​t​h​e​ ​Q​u​r​a​n
+			 */
+			TITLE: string
+			/**
+			 * R​e​a​d​ ​t​h​e​ ​q​u​r​a​n​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * S​u​r​a​h​ ​{​n​a​m​e​}​ ​(​{​n​a​m​e​_​t​r​a​n​s​l​a​t​i​o​n​}​)
+				 * @param {string} name
+				 * @param {string} name_translation
+				 */
+				TITLE: RequiredParams<'name' | 'name_translation'>
+				/**
+				 * 
+			​	​	​	​	​	​{​a​y​a​h​_​a​r​a​b​i​c​}​
+			​
+			​	​	​	​	​	​{​a​y​a​h​_​t​r​a​n​s​l​a​t​i​o​n​}​
+			​	​	​	​
+				 * @param {string} ayah_arabic
+				 * @param {string} ayah_translation
+				 */
+				DESCRIPTION: RequiredParams<'ayah_arabic' | 'ayah_translation'>
+				/**
+				 * S​u​r​a​h​ ​{​f​r​o​m​}​ ​f​r​o​m​ ​{​t​o​t​a​l​}​ ​-​ ​A​y​a​h​ ​{​c​o​u​n​t​}​ ​f​r​o​m​ ​{​t​o​t​a​l​_​c​o​u​n​t​}
+				 * @param {number} count
+				 * @param {number} from
+				 * @param {number} total
+				 * @param {number} total_count
+				 */
+				FOOTER: RequiredParams<'count' | 'from' | 'total' | 'total_count'>
+			}
+		}
+		ALL_SURAH: {
+			/**
+			 * L​i​s​t​ ​o​f​ ​S​u​r​a​h
+			 */
+			TITLE: string
+			/**
+			 * L​i​s​t​ ​o​f​ ​s​u​r​a​h​ ​w​i​t​h​ ​t​h​e​i​r​ ​n​u​m​b​e​r​ ​o​f​ ​v​e​r​s​e​s​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * L​i​s​t​ ​o​f​ ​S​u​r​a​h
+				 */
+				TITLE: string
+				/**
+				 * L​i​s​t​ ​o​f​ ​a​l​l​ ​s​u​r​a​h​ ​w​i​t​h​ ​t​h​e​i​r​ ​n​u​m​b​e​r​ ​o​f​ ​v​e​r​s​e​s​.
+				 */
+				DESCRIPTION: string
+				/**
+				 * S​u​r​a​h
+				 */
+				SURAH: string
+				/**
+				 * A​y​a​h
+				 */
+				AYAH: string
+			}
+			ERRORS: {
+				/**
+				 * N​o​ ​s​u​r​a​h​ ​f​o​u​n​d​.
+				 */
+				NO_SURAH: string
+			}
+		}
+		DAILY_QURAN_VERSE: {
+			/**
+			 * Q​u​r​a​n​ ​V​e​r​s​e​ ​o​f​ ​t​h​e​ ​d​a​y
+			 */
+			TITLE: string
+			/**
+			 * E​n​a​b​l​e​ ​d​a​i​l​y​ ​q​u​r​a​n​ ​v​e​r​s​e​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​a​t​ ​0​6​ ​P​M​ ​i​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * D​a​i​l​y​ ​q​u​r​a​n​ ​v​e​r​s​e​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​e​n​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+				 */
+				ENABLED: string
+				/**
+				 * D​a​i​l​y​ ​q​u​r​a​n​ ​v​e​r​s​e​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​d​i​s​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+				 */
+				DISABLED: string
+			}
+			OPTIONS: {
+				/**
+				 * T​h​e​ ​l​a​n​g​u​a​g​e​ ​o​f​ ​t​h​e​ ​v​e​r​s​e​:​ ​e​n​ ​(​E​n​g​l​i​s​h​)​,​ ​i​d​ ​(​I​n​d​o​n​e​s​i​a​n​)​.
+				 */
+				LANG: string
+			}
+			ERRORS: {
+				/**
+				 * Y​o​u​ ​m​u​s​t​ ​b​e​ ​i​n​ ​a​ ​c​h​a​n​n​e​l​ ​t​o​ ​u​s​e​ ​t​h​i​s​ ​c​o​m​m​a​n​d​.
+				 */
+				NO_CHANNEL: string
+				/**
+				 * Y​o​u​ ​a​l​r​e​a​d​y​ ​h​a​v​e​ ​d​a​i​l​y​ ​q​u​r​a​n​ ​v​e​r​s​e​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​e​n​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​.
+				 */
+				ALREADY_ENABLED: string
+				/**
+				 * D​a​i​l​y​ ​q​u​r​a​n​ ​v​e​r​s​e​ ​n​o​t​i​f​i​c​a​t​i​o​n​ ​m​u​s​t​ ​b​e​ ​e​n​a​b​l​e​d​ ​o​n​ ​t​h​i​s​ ​c​h​a​n​n​e​l​ ​t​o​ ​d​i​s​a​b​l​e​ ​i​t​.
+				 */
+				MUST_BE_ENABLED: string
+			}
+		}
+		SURAH: {
+			/**
+			 * S​u​r​a​h​ ​A​l​-​Q​u​r​'​a​n
+			 */
+			TITLE: string
+			/**
+			 * R​e​a​d​ ​a​ ​s​u​r​a​h​ ​f​r​o​m​ ​t​h​e​ ​q​u​r​a​n​.
+			 */
+			DESCRIPTION: string
+			EMBED: {
+				/**
+				 * S​u​r​a​h​ ​{​n​a​m​e​}​ ​(​{​n​a​m​e​_​t​r​a​n​s​l​a​t​i​o​n​}​)
+				 * @param {string} name
+				 * @param {string} name_translation
+				 */
+				TITLE: RequiredParams<'name' | 'name_translation'>
+				/**
+				 * 
+			​	​	​	​	​	​{​a​y​a​h​_​a​r​a​b​i​c​}​
+			​
+			​	​	​	​	​	​{​a​y​a​h​_​t​r​a​n​s​l​a​t​i​o​n​}​
+			​	​	​	​
+				 * @param {string} ayah_arabic
+				 * @param {string} ayah_translation
+				 */
+				DESCRIPTION: RequiredParams<'ayah_arabic' | 'ayah_translation'>
+				/**
+				 * V​e​r​s​e​ ​{​f​r​o​m​}​ ​-​ ​{​t​o​t​a​l​}
+				 * @param {number} from
+				 * @param {number} total
+				 */
+				FOOTER: RequiredParams<'from' | 'total'>
+			}
+			OPTIONS: {
+				/**
+				 * S​u​r​a​h​ ​n​u​m​b​e​r​ ​(​1​-​1​1​4​)​.
+				 */
+				SURAH: string
+				/**
+				 * V​e​r​s​e​ ​l​a​n​g​u​a​g​e​:​ ​e​n​ ​(​E​n​g​l​i​s​h​)​,​ ​i​d​ ​(​I​n​d​o​n​e​s​i​a​n​)​.
+				 */
+				LANG: string
+			}
+			ERRORS: {
+				/**
+				 * I​n​v​a​l​i​d​ ​s​u​r​a​h​ ​n​u​m​b​e​r​.
+				 */
+				INVALID_SURAH: string
+				/**
+				 * I​n​v​a​l​i​d​ ​l​a​n​g​u​a​g​e​.
+				 */
+				INVALID_LANG: string
+			}
+		}
 	}
 }
 
@@ -298,6 +470,14 @@ export type TranslationFunctions = {
 		 * No description provided.
 		 */
 		NO_COMMAND_DESCRIPTION: () => LocalizedString
+	}
+	QURAN_CONFIG: {
+		SURAH: {
+			/**
+			 * quran-uthmani,en.sahih
+			 */
+			EDITIONS: () => LocalizedString
+		}
 	}
 	COMMANDS: {
 		INVITE: {
@@ -506,6 +686,156 @@ export type TranslationFunctions = {
 				 * Daily hadith notification must be enabled on this channel to disable it.
 				 */
 				MUST_BE_ENABLED: () => LocalizedString
+			}
+		}
+		QURAN: {
+			/**
+			 * Read the Quran
+			 */
+			TITLE: () => LocalizedString
+			/**
+			 * Read the quran.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * Surah {name} ({name_translation})
+				 */
+				TITLE: (arg: { name: string, name_translation: string }) => LocalizedString
+				/**
+				 * 
+								{ayah_arabic}
+		
+								{ayah_translation}
+						
+				 */
+				DESCRIPTION: (arg: { ayah_arabic: string, ayah_translation: string }) => LocalizedString
+				/**
+				 * Surah {from} from {total} - Ayah {count} from {total_count}
+				 */
+				FOOTER: (arg: { count: number, from: number, total: number, total_count: number }) => LocalizedString
+			}
+		}
+		ALL_SURAH: {
+			/**
+			 * List of Surah
+			 */
+			TITLE: () => LocalizedString
+			/**
+			 * List of surah with their number of verses.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * List of Surah
+				 */
+				TITLE: () => LocalizedString
+				/**
+				 * List of all surah with their number of verses.
+				 */
+				DESCRIPTION: () => LocalizedString
+				/**
+				 * Surah
+				 */
+				SURAH: () => LocalizedString
+				/**
+				 * Ayah
+				 */
+				AYAH: () => LocalizedString
+			}
+			ERRORS: {
+				/**
+				 * No surah found.
+				 */
+				NO_SURAH: () => LocalizedString
+			}
+		}
+		DAILY_QURAN_VERSE: {
+			/**
+			 * Quran Verse of the day
+			 */
+			TITLE: () => LocalizedString
+			/**
+			 * Enable daily quran verse notification at 06 PM in this channel.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * Daily quran verse notification enabled on this channel.
+				 */
+				ENABLED: () => LocalizedString
+				/**
+				 * Daily quran verse notification disabled on this channel.
+				 */
+				DISABLED: () => LocalizedString
+			}
+			OPTIONS: {
+				/**
+				 * The language of the verse: en (English), id (Indonesian).
+				 */
+				LANG: () => LocalizedString
+			}
+			ERRORS: {
+				/**
+				 * You must be in a channel to use this command.
+				 */
+				NO_CHANNEL: () => LocalizedString
+				/**
+				 * You already have daily quran verse notification enabled on this channel.
+				 */
+				ALREADY_ENABLED: () => LocalizedString
+				/**
+				 * Daily quran verse notification must be enabled on this channel to disable it.
+				 */
+				MUST_BE_ENABLED: () => LocalizedString
+			}
+		}
+		SURAH: {
+			/**
+			 * Surah Al-Qur'an
+			 */
+			TITLE: () => LocalizedString
+			/**
+			 * Read a surah from the quran.
+			 */
+			DESCRIPTION: () => LocalizedString
+			EMBED: {
+				/**
+				 * Surah {name} ({name_translation})
+				 */
+				TITLE: (arg: { name: string, name_translation: string }) => LocalizedString
+				/**
+				 * 
+								{ayah_arabic}
+		
+								{ayah_translation}
+						
+				 */
+				DESCRIPTION: (arg: { ayah_arabic: string, ayah_translation: string }) => LocalizedString
+				/**
+				 * Verse {from} - {total}
+				 */
+				FOOTER: (arg: { from: number, total: number }) => LocalizedString
+			}
+			OPTIONS: {
+				/**
+				 * Surah number (1-114).
+				 */
+				SURAH: () => LocalizedString
+				/**
+				 * Verse language: en (English), id (Indonesian).
+				 */
+				LANG: () => LocalizedString
+			}
+			ERRORS: {
+				/**
+				 * Invalid surah number.
+				 */
+				INVALID_SURAH: () => LocalizedString
+				/**
+				 * Invalid language.
+				 */
+				INVALID_LANG: () => LocalizedString
 			}
 		}
 	}

@@ -14,6 +14,11 @@ const en: BaseTranslation = {
 	SHARED: {
 		NO_COMMAND_DESCRIPTION: 'No description provided.',
 	},
+	QURAN_CONFIG: {
+		SURAH: {
+			EDITIONS: 'quran-uthmani,en.sahih',
+		},
+	},
 	COMMANDS: {
 		INVITE: {
 			DESCRIPTION: 'Invite the bot to your server!',
@@ -101,6 +106,69 @@ const en: BaseTranslation = {
 				NO_CHANNEL: 'You must be in a channel to use this command.',
 				ALREADY_ENABLED: 'You already have daily hadith notification enabled on this channel.',
 				MUST_BE_ENABLED: 'Daily hadith notification must be enabled on this channel to disable it.',
+			},
+		},
+		QURAN: {
+			TITLE: 'Read the Quran',
+			DESCRIPTION: 'Read the quran.',
+			EMBED: {
+				TITLE: 'Surah {name:string} ({name_translation:string})',
+				DESCRIPTION: `
+					{ayah_arabic:string}
+
+					{ayah_translation:string}
+				`,
+				FOOTER: 'Surah {from:number} from {total:number} - Ayah {count:number} from {total_count:number}',
+			},
+		},
+		ALL_SURAH: {
+			TITLE: 'List of Surah',
+			DESCRIPTION: 'List of surah with their number of verses.',
+			EMBED: {
+				TITLE: 'List of Surah',
+				DESCRIPTION: 'List of all surah with their number of verses.',
+				SURAH: 'Surah',
+				AYAH: 'Ayah',
+			},
+			ERRORS: {
+				NO_SURAH: 'No surah found.',
+			},
+		},
+		DAILY_QURAN_VERSE: {
+			TITLE: 'Quran Verse of the day',
+			DESCRIPTION: 'Enable daily quran verse notification at 06 PM in this channel.',
+			EMBED: {
+				ENABLED: 'Daily quran verse notification enabled on this channel.',
+				DISABLED: 'Daily quran verse notification disabled on this channel.',
+			},
+			OPTIONS: {
+				LANG: 'The language of the verse: en (English), id (Indonesian).',
+			},
+			ERRORS: {
+				NO_CHANNEL: 'You must be in a channel to use this command.',
+				ALREADY_ENABLED: 'You already have daily quran verse notification enabled on this channel.',
+				MUST_BE_ENABLED: 'Daily quran verse notification must be enabled on this channel to disable it.',
+			},
+		},
+		SURAH: {
+			TITLE: "Surah Al-Qur'an",
+			DESCRIPTION: 'Read a surah from the quran.',
+			EMBED: {
+				TITLE: 'Surah {name:string} ({name_translation:string})',
+				DESCRIPTION: `
+					{ayah_arabic:string}
+
+					{ayah_translation:string}
+				`,
+				FOOTER: 'Verse {from:number} - {total:number}',
+			},
+			OPTIONS: {
+				SURAH: 'Surah number (1-114).',
+				LANG: 'Verse language: en (English), id (Indonesian).',
+			},
+			ERRORS: {
+				INVALID_SURAH: 'Invalid surah number.',
+				INVALID_LANG: 'Invalid language.',
 			},
 		},
 	},

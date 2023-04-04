@@ -20,7 +20,16 @@ export class GuildNotification {
     dailyHadith: boolean = false
 
     @Property()
+    dailyQuran: boolean = false
+
+    @Property()
+    language: string = 'id'
+
+    @Property()
     createdAt: Date = new Date()
+
+    @Property()
+    updatedAt?: Date = new Date()
 }
 
 // ===========================================

@@ -164,8 +164,38 @@
           "default": "false",
           "mappedType": "integer"
         },
+        "daily_quran": {
+          "name": "daily_quran",
+          "type": "integer",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "false",
+          "mappedType": "integer"
+        },
+        "language": {
+          "name": "language",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "'en'",
+          "mappedType": "text"
+        },
         "created_at": {
           "name": "created_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "mappedType": "datetime"
+        },
+        "updated_at": {
+          "name": "updated_at",
           "type": "datetime",
           "unsigned": false,
           "autoincrement": false,

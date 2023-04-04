@@ -14,6 +14,11 @@ const id: Translation = {
 	SHARED: {
 		NO_COMMAND_DESCRIPTION: 'Tidak ada deskripsi yang disediakan.',
 	},
+	QURAN_CONFIG: {
+		SURAH: {
+			EDITIONS: 'quran-uthmani,id.indonesian',
+		},
+	},
 	COMMANDS: {
 		INVITE: {
 			DESCRIPTION: 'Undang bot ke servermu!',
@@ -101,6 +106,69 @@ const id: Translation = {
 				NO_CHANNEL: 'Kamu harus berada di channel untuk menggunakan perintah ini.',
 				ALREADY_ENABLED: 'Kamu sudah memiliki notifikasi hadist harian di channel ini.',
 				MUST_BE_ENABLED: 'Notifikasi hadist harian harus diaktifkan di channel ini untuk menonaktifkannya.',
+			},
+		},
+		QURAN: {
+			TITLE: "Baca Al-Qur'an",
+			DESCRIPTION: "Baca Al-Qur'an dengan mudah.",
+			EMBED: {
+				TITLE: 'Surat {name} ({name_translation})',
+				DESCRIPTION: `
+					{ayah_arabic}
+
+					{ayah_translation}
+				`,
+				FOOTER: 'Surat ke-{from} dari {total} - Bacaan ke-{count} dari {total_count}',
+			},
+		},
+		ALL_SURAH: {
+			TITLE: 'Daftar Surat',
+			DESCRIPTION: 'Daftar surat beserta jumlah ayatnya.',
+			EMBED: {
+				TITLE: 'Daftar Surat',
+				DESCRIPTION: 'Daftar semua surat beserta jumlah ayatnya.',
+				SURAH: 'Surat',
+				AYAH: 'Ayat',
+			},
+			ERRORS: {
+				NO_SURAH: 'Tidak ada surat yang ditemukan.',
+			},
+		},
+		DAILY_QURAN_VERSE: {
+			TITLE: "Ayat Al-Qur'an Harian",
+			DESCRIPTION: "Aktifkan notifikasi ayat Al-Qur'an harian setiap jam 6 sore di channel ini.",
+			EMBED: {
+				ENABLED: "Notifikasi ayat Al-Qur'an harian diaktifkan di channel ini.",
+				DISABLED: "Notifikasi ayat Al-Qur'an harian dinonaktifkan di channel ini.",
+			},
+			OPTIONS: {
+				LANG: 'Bahasa ayat: en (Inggris), id (Indonesia).',
+			},
+			ERRORS: {
+				NO_CHANNEL: 'Kamu harus berada di channel untuk menggunakan perintah ini.',
+				ALREADY_ENABLED: "Kamu sudah memiliki notifikasi ayat Al-Qur'an harian di channel ini.",
+				MUST_BE_ENABLED: "Notifikasi ayat Al-Qur'an harian harus diaktifkan di channel ini untuk menonaktifkannya.",
+			},
+		},
+		SURAH: {
+			TITLE: "Surat Al-Qur'an",
+			DESCRIPTION: "Baca surat Al-Qur'an.",
+			EMBED: {
+				TITLE: 'Surat {name} ({name_translation})',
+				DESCRIPTION: `
+					{ayah_arabic}
+
+					{ayah_translation}
+				`,
+				FOOTER: 'Ayat {from} - {total}',
+			},
+			OPTIONS: {
+				SURAH: 'Nomor surat (1-114).',
+				LANG: 'Bahasa ayat: en (Inggris), id (Indonesia).',
+			},
+			ERRORS: {
+				INVALID_SURAH: 'Nomor surat tidak valid.',
+				INVALID_LANG: 'Bahasa ayat tidak valid.',
 			},
 		},
 	},
