@@ -57,30 +57,29 @@ export default class DailyQuranVerseCommand {
       guildData = await this.guildNotification.get(guild!.id),
       channel = resolveChannel(interaction)
 
-      try {
-        if (guildData) {
-          if (guildData.dailyQuran && state && (channel?.id === guildData.channelId)) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_QURAN_VERSE']['ERRORS']['ALREADY_ENABLED']())
-          guildData.dailyQuran = state
-          guildData.language = lang ?? 'id'
+    try {
+      if (guildData) {
+        if (guildData.dailyQuran && state && (channel?.id === guildData.channelId)) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_QURAN_VERSE']['ERRORS']['ALREADY_ENABLED']())
+        guildData.dailyQuran = state
+        guildData.language = lang || guildData.language
 
-          this.guildNotification.update(guild!.id, guildData )
+        this.guildNotification.update(guild!.id, guildData )
 
-          const message = state ? localize['COMMANDS']['DAILY_QURAN_VERSE']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_QURAN_VERSE']['EMBED']['DISABLED']()
-          simpleSuccessEmbed(interaction, message)
+        const message = state ? localize['COMMANDS']['DAILY_QURAN_VERSE']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_QURAN_VERSE']['EMBED']['DISABLED']()
+        simpleSuccessEmbed(interaction, message)
+      } else {
+        if (!state) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_QURAN_VERSE']['ERRORS']['MUST_BE_ENABLED']())
+
+        const newGuild: GuildNotificationType = {
+          id: guild!.id,
+          dailyQuran: state,
+          channelId: channel!.id,
+          language: lang ?? 'id'
         }
-        else {
-          if (!state) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_QURAN_VERSE']['ERRORS']['MUST_BE_ENABLED']())
+        this.guildNotification.create(newGuild)
 
-          const newGuild: GuildNotificationType = {
-            id: guild!.id,
-            dailyQuran: state,
-            channelId: channel!.id,
-            language: lang ?? 'id'
-          }
-          this.guildNotification.create(newGuild)
-
-          simpleSuccessEmbed(interaction, localize['COMMANDS']['DAILY_QURAN_VERSE']['EMBED']['ENABLED']())
-        }
+        simpleSuccessEmbed(interaction, localize['COMMANDS']['DAILY_QURAN_VERSE']['EMBED']['ENABLED']())
+      }
     } catch (error) {
       throw new UnknownReplyError(interaction)
     }
