@@ -121,6 +121,8 @@ export class Hadith {
     const randomRawi = rawis[Math.floor(Math.random() * rawis.length)]
     const randomHadith = await this.getHadith(randomRawi.id, Math.floor(Math.random() * randomRawi.available) + 1)
 
+    if (!randomHadith) return
+
     return randomHadith
   }
 }

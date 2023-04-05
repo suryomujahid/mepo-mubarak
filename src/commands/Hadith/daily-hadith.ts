@@ -3,13 +3,13 @@ import { ApplicationCommandOptionType, CommandInteraction } from "discord.js"
 import { Client } from "discordx"
 import { injectable } from "tsyringe"
 
-import { generalConfig } from "@configs"
-import { Discord, Slash, SlashOption } from "@decorators"
-import { Guild, GuildNotification } from "@entities"
+import { Discord, Slash, SlashChoice, SlashOption } from "@decorators"
 import { UnknownReplyError } from "@errors"
 import { Guard, UserPermissions } from "@guards"
-import { Database } from "@services"
+import { GuildNotification } from "@services"
 import { resolveChannel, resolveGuild, simpleSuccessEmbed } from "@utils/functions"
+import { L, Locales } from "@i18n"
+import { GuildNotificationType } from "src/utils/types/guildNotification"
 
 @Discord()
 @injectable()
@@ -17,7 +17,7 @@ import { resolveChannel, resolveGuild, simpleSuccessEmbed } from "@utils/functio
 export default class DailyHadithCommand {
 
   constructor(
-    private db: Database,
+    private guildNotification: GuildNotification,
   ) { }
 
   @Slash({ name: 'daily-hadith' })
@@ -30,41 +30,58 @@ export default class DailyHadithCommand {
       type: ApplicationCommandOptionType.Boolean,
       required: true,
     }) state: boolean | undefined,
+    @SlashChoice({
+      name: 'English',
+      value: 'en',
+    })
+    @SlashChoice({
+      name: 'Indonesia',
+      value: 'id',
+    })
+    @SlashOption({
+      name: 'lang',
+      type: ApplicationCommandOptionType.String,
+      description: L['en']['COMMANDS']['DAILY_QURAN_VERSE']['OPTIONS']['LANG'](),
+      descriptionLocalizations: {
+        en: L['en']['COMMANDS']['DAILY_QURAN_VERSE']['OPTIONS']['LANG'](),
+        id: L['id']['COMMANDS']['DAILY_QURAN_VERSE']['OPTIONS']['LANG'](),
+      },
+      required: false,
+      maxLength: 2
+    }) lang: Locales,
     interaction: CommandInteraction,
     client: Client,
     { localize }: InteractionData
   ) {
-    // TODO: Create a service to handle this (especially the part where database is called)
     const guild = resolveGuild(interaction),
-      guildData = await this.db.get(GuildNotification).findOne({ id: guild?.id || '' }),
+      guildData = await this.guildNotification.get(guild!.id),
       channel = resolveChannel(interaction)
 
-    if (guildData.dailyHadith && state && (channel?.id === guildData.channelId)) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['ALREADY_ENABLED']())
+      try {
+        if (guildData) {
+          if (guildData.dailyHadith && state && (channel?.id === guildData.channelId)) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['ALREADY_ENABLED']())
+          guildData.dailyHadith = state
+          guildData.language = lang || guildData.language
 
-    try {
-      if (guildData) {
-        guildData.dailyHadith = state
+          this.guildNotification.update(guild!.id, guildData)
 
-        this.db.get(GuildNotification).persistAndFlush(guildData)
+          const message = state ? localize['COMMANDS']['DAILY_HADITH']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_HADITH']['EMBED']['DISABLED']()
+          simpleSuccessEmbed(interaction, message)
+        } else {
+          if (!state) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['MUST_BE_ENABLED']())
 
-        const message = state ? localize['COMMANDS']['DAILY_HADITH']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_HADITH']['EMBED']['DISABLED']()
-        simpleSuccessEmbed(interaction, message)
+          const newGuild: GuildNotificationType = {
+            id: guild!.id,
+            channelId: channel!.id,
+            dailyHadith: state,
+            language: lang || 'id'
+          }
+          this.guildNotification.create(newGuild)
+
+          simpleSuccessEmbed(interaction, localize['COMMANDS']['DAILY_HADITH']['EMBED']['ENABLED']())
+        }
+      } catch (error) {
+        throw new UnknownReplyError(interaction)
       }
-      else {
-        if (!state) throw new UnknownReplyError(interaction, localize['COMMANDS']['DAILY_HADITH']['ERRORS']['MUST_BE_ENABLED']())
-
-        const newGuild = new GuildNotification()
-        newGuild.id = guild!.id
-        newGuild.dailyHadith = state
-        newGuild.channelId = channel!.id
-        this.db.get(GuildNotification).persistAndFlush(newGuild)
-
-        const message = state ? localize['COMMANDS']['DAILY_HADITH']['EMBED']['ENABLED']() : localize['COMMANDS']['DAILY_HADITH']['EMBED']['DISABLED']()
-        simpleSuccessEmbed(interaction, message)
-      }
-    } catch (error) {
-      throw new UnknownReplyError(interaction)
-    }
-
   }
 }

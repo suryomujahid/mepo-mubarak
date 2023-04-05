@@ -2,10 +2,8 @@ import { Client } from 'discordx'
 
 import { Discord, OnCustom, Schedule } from '@decorators'
 import { injectable } from 'tsyringe'
-import { Database, Logger } from '@services'
+import { GuildNotification, Hadith, Logger } from '@services'
 import { EntityRepository } from '@mikro-orm/sqlite'
-import { GuildNotification } from '@entities'
-import { Hadith } from '@services'
 import { EmbedBuilder, TextChannel } from 'discord.js'
 import { getColor } from '@utils/functions'
 import { L } from '@i18n'
@@ -24,10 +22,9 @@ export default class DailyHadith {
   constructor(
     private client: Client,
     private logger: Logger,
-    private db: Database,
+    private guildNotification: GuildNotification,
     private hadith: Hadith
   ) {
-    this.guildNotificationRepo = this.db.em.getRepository(GuildNotification)
     this.logger
   }
 
@@ -36,43 +33,44 @@ export default class DailyHadith {
   async dailyRandomHadith(): Promise<void> {
     this.logger.log(`Schedule: Daily random hadith started`)
 
-    const guildNotifications = await this.guildNotificationRepo.findAll()
-
+    const guildNotifications = await this.guildNotification.getAll({ dailyHadith: true })
     if (!guildNotifications || guildNotifications.length === 0) {
       this.logger.log(`Schedule: Daily random hadith stopped. No guild notification found`)
       return
     }
 
-    const hadith = await this.hadith.getRandomHadith()
-
-    if (!hadith || !hadith.contents) return
+    // Temporary fix for hadith api error
+    let errorCount = 0
+    do {
+      var hadith = await this.hadith.getRandomHadith()
+    } while (!hadith) {
+      errorCount++
+      if (errorCount > 5)  {
+        this.logger.log(`Schedule: Daily random hadith stopped. No hadith found`)
+        return
+      }
+    }
 
     for (const guildNotification of guildNotifications) {
-
       const guild = this.client.guilds.cache.get(guildNotification.id)
       if (!guild) continue
 
       const channel = guild.channels.cache.get(guildNotification.channelId)
+      if (!channel) continue
 
-      // TODO: Add language support
       const body = `${hadith?.contents?.arab}\n\n${hadith?.contents?.id}`
       const embed =  new EmbedBuilder()
-        // .setAuthor({
-        //   name: interaction.user.username,
-        //   iconURL: interaction.user.displayAvatarURL({ forceStatic: false })
-        // })
-        .setTitle(L['en']['COMMANDS']['DAILY_HADITH']['TITLE']())
-        .setDescription(L['en']['COMMANDS']['RANDOM_HADITH']['EMBED']['DESCRIPTION']({ hadith: body }))
+        .setTitle('👳‍♂️ ' + L[guildNotification.language]['COMMANDS']['DAILY_HADITH']['TITLE'](),)
+        .setDescription(L[guildNotification.language]['COMMANDS']['RANDOM_HADITH']['EMBED']['DESCRIPTION']({ hadith: body }))
         .setColor(getColor('primary'))
         .setTimestamp()
         .setFooter({
-          text: L['en']['COMMANDS']['RANDOM_HADITH']['EMBED']['FOOTER']({rawi: hadith?.name, no: hadith?.contents?.number})
+          text: L[guildNotification.language]['COMMANDS']['RANDOM_HADITH']['EMBED']['FOOTER']({rawi: hadith?.name, no: hadith?.contents?.number})
         })
 
       await (channel as TextChannel).send({ embeds: [embed] })
-
     }
 
-    this.logger.log(`Schedule: Daily random hadith sent`)
+    this.logger.log(`Schedule: Daily random hadith finished`)
   }
 }
